@@ -10,7 +10,7 @@
 
 โปรเจกต์นี้ทำโดย นายกันตพงศ์ วิชชุเกรียงไกร
 
-   pip install requests
-
-   python db.py
-
+```
+    pip install requests
+    python db.py
+```
