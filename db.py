@@ -58,7 +58,7 @@ def analyze_data_with_sql(db_name="stock_data.db"):
 
     print("\n--- Data Analytics ---")
 
-    # 1. แสดงค่าเฉลี่ยของราคาเปิด, ราคาสูงสุด, ราคาต่ำสุด และราคาปิด
+    # 1. แสดงค่าเฉลี่ยของราคาเปิด, ราคาสูงสุด, ราคาต่ำสุด และราคาปิดของหุ้น
     cursor.execute("""
         SELECT AVG(open) AS avg_open,
                AVG(high) AS avg_high,
@@ -73,7 +73,7 @@ def analyze_data_with_sql(db_name="stock_data.db"):
     print(f"  ราคาต่ำสุด: {average_prices[2]:.2f}")
     print(f"  ราคาปิด: {average_prices[3]:.2f}")
 
-    # 2. แสดงวันที่ที่มีปริมาณการซื้อขายสูงสุด 3 อันดับแรก
+    # 2. แสดงวันที่ที่มีปริมาณการซื้อขายของหุ้นสูงสุด 3 อันดับแรก
     cursor.execute("""
         SELECT date, volume
         FROM daily_stock_data
@@ -85,7 +85,7 @@ def analyze_data_with_sql(db_name="stock_data.db"):
     for date, volume in top_volume_dates:
         print(f"  วันที่: {date}, ปริมาณ: {volume}")
 
-    # 3. แสดงวันที่ที่มีช่วงราคาสูงสุด (high - low) 3 อันดับแรก
+    # 3. แสดงวันที่ที่มีช่วงราคาสูงสุดของหุ้น (high - low) 3 อันดับแรก
     cursor.execute("""
         SELECT date, (high - low) AS price_range
         FROM daily_stock_data
@@ -105,7 +105,7 @@ def analyze_data_with_sql_extended(db_name="stock_data.db"):
     cursor = conn.cursor()
 
 
-    # 4. แสดงวันที่ที่มีราคาปิดสูงสุด
+    # 4. แสดงวันที่ที่มีราคาปิดของหุ้นสูงสุด
     cursor.execute("""
         SELECT date, close
         FROM daily_stock_data
@@ -115,7 +115,7 @@ def analyze_data_with_sql_extended(db_name="stock_data.db"):
     highest_close = cursor.fetchone()
     print(f"\n4.วันที่ที่มีราคาหุ้นปิดสูงสุด: {highest_close[0]}, ราคา: {highest_close[1]:.2f}")
 
-    # 5. แสดงวันที่ที่มีราคาปิดต่ำสุด
+    # 5. แสดงวันที่ที่มีราคาปิดของหุ้นต่ำสุด
     cursor.execute("""
         SELECT date, close
         FROM daily_stock_data
@@ -125,7 +125,7 @@ def analyze_data_with_sql_extended(db_name="stock_data.db"):
     lowest_close = cursor.fetchone()
     print(f"5.วันที่ที่มีราคาหุ้นปิดต่ำสุด: {lowest_close[0]}, ราคา: {lowest_close[1]:.2f}")
 
-    # 6. แสดงค่าเฉลี่ยของปริมาณการซื้อขาย
+    # 6. แสดงค่าเฉลี่ยของปริมาณการซื้อขายของหุ้น
     cursor.execute("""
         SELECT AVG(volume) AS avg_volume
         FROM daily_stock_data
@@ -134,7 +134,7 @@ def analyze_data_with_sql_extended(db_name="stock_data.db"):
     print(f"\n6.ค่าเฉลี่ยของปริมาณการซื้อขายหุ้น: {average_volume:.0f}")
 
 
-    # 7. แสดงจำนวนวันที่ที่มีราคาปิดสูงกว่าราคาเปิด
+    # 7. แสดงจำนวนวันที่ที่มีราคาปิดของหุ้นสูงกว่าราคาเปิด
     cursor.execute("""
         SELECT COUNT(*)
         FROM daily_stock_data
@@ -143,7 +143,7 @@ def analyze_data_with_sql_extended(db_name="stock_data.db"):
     days_close_higher_than_open = cursor.fetchone()[0]
     print(f"\n7.จำนวนวันที่ราคาหุ้นปิดสูงกว่าราคาเปิด: {days_close_higher_than_open} วัน")
 
-    # 8. แสดงจำนวนวันที่ที่มีราคาปิดต่ำกว่าราคาเปิด
+    # 8. แสดงจำนวนวันที่ที่มีราคาปิดของหุ้นต่ำกว่าราคาเปิด
     cursor.execute("""
         SELECT COUNT(*)
         FROM daily_stock_data
@@ -152,7 +152,7 @@ def analyze_data_with_sql_extended(db_name="stock_data.db"):
     days_close_lower_than_open = cursor.fetchone()[0]
     print(f"8.จำนวนวันที่ราคาหุ้นปิดต่ำกว่าราคาเปิด: {days_close_lower_than_open} วัน")
 
-    # 9. แสดงวันที่ที่มีอัตราส่วนของราคาสูงสุดต่อราคาต่ำสุดสูงสุด (แสดงถึงความผันผวนระหว่างวันมาก)
+    # 9. แสดงวันที่ที่มีอัตราส่วนของราคาสูงสุดต่อราคาต่ำสุดสูงสุดของหุ้น (แสดงถึงความผันผวนระหว่างวันมาก)
     cursor.execute("""
         SELECT date, (high / low) AS volatility_ratio
         FROM daily_stock_data
