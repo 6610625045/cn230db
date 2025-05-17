@@ -2,7 +2,7 @@ import requests
 import sqlite3
 import json
 
-# --- ขั้นตอนที่ 1: อ่านข้อมูลจากแหล่งข้อมูล API (จำลอง) ---
+# --- อ่านข้อมูลจากแหล่งข้อมูล API (จำลอง) ---
 def fetch_data_from_api():
     """จำลองการดึงข้อมูลจาก API ของ Alpha Vantage."""
     # ข้อมูลสมมติในรูปแบบ JSON
@@ -21,13 +21,13 @@ def fetch_data_from_api():
     }
     return mock_data
 
-# --- ขั้นตอนที่ 2: นำข้อมูลเก็บใน DBMS โดยใช้ sqlite3 ---
+# ---  นำข้อมูลเก็บใน DBMS โดยใช้ sqlite3 ---
 def store_data_to_sqlite(data, db_name="stock_data.db"):
     """เก็บข้อมูลจาก API ลงในฐานข้อมูล SQLite."""
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
 
-    # สร้างตารางหากยังไม่มี
+   
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS daily_stock_data (
             date TEXT PRIMARY KEY,
@@ -50,7 +50,7 @@ def store_data_to_sqlite(data, db_name="stock_data.db"):
     conn.close()
     print(f"ข้อมูลถูกจัดเก็บลงในฐานข้อมูล '{db_name}' แล้ว.")
 
-# --- ขั้นตอนที่ 3: ใช้ SQL ทำ data analytics จากข้อมูล ---
+# ---  ใช้ SQL ทำ data analytics จากข้อมูล ---
 def analyze_data_with_sql(db_name="stock_data.db"):
     """วิเคราะห์ข้อมูลด้วย SQL และแสดงผลลัพธ์."""
     conn = sqlite3.connect(db_name)
