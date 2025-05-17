@@ -1,14 +1,9 @@
-# CN230 Project Template
+# Stock Data Analytic With Alpha Vantage API
 
-    python db.py
+โปรเจกต์นี้ใช้ Python ใน การทำData Analytic
+-ดีงข้อมูลหุ้นมาจาก Alpha Vantage API
+-เก็บข้อมูลไว้ในฐานข้อมูล SQlite
+-ใช้ SQL วิเคราะห์ข้อมูลในชุดข้อมูล เช่น ค่าเฉลี่ยราคาหุ้น ราคาซื้อหุ้นที่สูงที่สุด ราคาซื้อหุ้นที่ต่ำที่สุด
 
+โปรเจกต์นี้ทำโดย นายกันตพงศ์ วิชชุเกรียงไกร
 
-1. fork this repository
-2. run codespaces
-3. when done execute the following git command
-
-```
-    git add .
-    git commit -m "finished"
-    git push origin main
-```
